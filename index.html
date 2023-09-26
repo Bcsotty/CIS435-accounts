@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Login</title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+        <link href="style.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div class="login">
+			<div class="tab">
+				<button class="tablinks active" onclick="openTab(event, 'Login')">Login</button>
+				<button class="tablinks" onclick="openTab(event, 'Register')">Register</button>
+			</div>
+			<div class="tabcontent" id="Login" style="display: block">
+				<form action="authenticate.php" method="post">
+					<label for="username">
+						<i class="fas fa-user"></i>
+					</label>
+					<input type="text" name="username" placeholder="Username" id="username" required>
+					<label for="password">
+						<i class="fas fa-lock"></i>
+					</label>
+					<input type="password" name="password" placeholder="Password" id="password" required>
+					<input type="submit" value="Login">
+				</form>
+			</div>
+			<div class="tabcontent" id="Register" style="display: none">
+				<form action="" id="register_form">
+					<label for="new_username">
+						<i class="fas fa-user"></i>
+					</label>
+					<input type="text" name="new_username" id="new_username" placeholder="Username" required>
+					<label for="new_password">
+						<i class="fas fa-lock"></i>
+					</label>
+					<input type="password" name="new_password" id="new_password" placeholder="Password" required>
+					<label for="password_confirm">
+						<i class="fas fa-lock"></i>
+					</label>
+					<input type="password" name="password_confirm" id="password_confirm" placeholder="Confirm Password" onkeyup="validatePassword()" required>
+					<label for="email">
+						<i class="fas fa-envelope"></i>
+					</label>
+					<input type="text" name="email" id="email" placeholder="Email" required>
+					<span id="invalid_input"></span>
+					<input type="submit" value="Register" id="register_submit">
+				</form>
+			</div>
+		</div>
+	</body>
+	<script src="index.js"></script>
+</html>
