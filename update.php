@@ -24,9 +24,19 @@ $prep = $con->prepare("update phplogin.accounts
 set accounts.username=?,
     accounts.password=?
 where accounts.id=?;");
- // TODO handle images
 $prep->bind_param('ssi', $new_usr, $new_pass, $_SESSION['id']);
 $prep->execute();
+$prep->close();
+
+// Update icon if sent
+if (isset($_POST['img'])) {
+    $image = $_POST['img'];
+    $prep2 = $con->prepare("update phplogin.icons
+set image=?
+where id=?;");
+    $prep2->bind_param("ib", $_SESSION['id'], $image);
+    $prep2->execute();
+}
 
 // Force user to log back in
 session_destroy();

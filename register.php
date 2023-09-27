@@ -58,9 +58,9 @@ if ($stmt = $con->prepare('SELECT id FROM accounts WHERE username = ?')) {
                 die("Couldn't read default image :((((");
             }
 
-            $newer_stmt = $con->prepare('INSERT INTO icons (id, image) VALUES (?, ?)');
-            $newer_stmt->bind_param("ib", $id, $default_pfp);
-            $newer_stmt->execute();
+            $newer_stmt = $con->prepare('INSERT INTO icons (id, image) VALUES (?, ?)') or die("Failed to prep!");
+            $newer_stmt->bind_param("ib", $id, $default_pfp) or die("Failed to bind!");
+            $newer_stmt->execute() or die("Failed to exec!");
 
             header('Location: home.php');
             exit();
