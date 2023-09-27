@@ -6,6 +6,21 @@ if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'phplogin';
+$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+if (mysqli_connect_errno()) {
+	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+}
+$stmt = $con->prepare('SELECT admin FROM accounts WHERE id = ?');
+// In this case we can use the account ID to get the account info.
+$stmt->bind_param('i', $_SESSION['id']);
+$stmt->execute();
+$stmt->bind_result($admin);
+$stmt->fetch();
+$stmt->close();
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,6 +34,11 @@ if (!isset($_SESSION['loggedin'])) {
 		<nav class="navtop">
 			<div>
 				<h1>Website Title</h1>
+				<?php 
+					if ($admin == 1) {
+						echo '<a href="admin.php"><i class="fas fa-eye"></i>Admin Panel</a>';
+					}
+				?>
 				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			</div>
