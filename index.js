@@ -59,7 +59,17 @@ async function register() {
                 },
                 body: JSON.stringify(data),
             });
-        console.log(response.headers);
+        
+        if (response.ok) {
+            var contentType = response.headers.get("Content-Type");
+            if (contentType && contentType.includes("application/json")) {
+                response.json().then((data) => {
+                    alert(data.errors);
+                });
+            } else {
+                window.location.href = response.url;
+            }
+        }
     }
 }
 
