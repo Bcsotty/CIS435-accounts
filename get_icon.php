@@ -1,11 +1,4 @@
 <?php
-// We need to use sessions, so you should always start sessions using the below code.
-session_start();
-// If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: index.html');
-    exit;
-}
 $DATABASE_HOST = '127.0.0.1';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
@@ -17,11 +10,15 @@ if (mysqli_connect_errno()) {
 
 // Fetch users icon
 $stmt2 = $con->prepare('SELECT image FROM icons WHERE id = ?');
-$stmt2->bind_param('i', $_SESSION['id']);
+$stmt2->bind_param('i', $_GET['id']);
 $stmt2->execute();
 $stmt2->bind_result($icon);
 $stmt2->fetch();
 $stmt2->close();
+
+if (strlen($icon) === 0) {
+    die("No icon :((((");
+}
 
 header("Content-type: image/png");
 echo $icon;

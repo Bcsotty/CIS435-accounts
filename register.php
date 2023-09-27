@@ -53,6 +53,11 @@ if ($stmt = $con->prepare('SELECT id FROM accounts WHERE username = ?')) {
 
             // Insert default pfp
             $default_pfp = file_get_contents("default.png");
+
+            if (strlen($default_pfp) === 0) {
+                die("Couldn't read default image :((((");
+            }
+
             $newer_stmt = $con->prepare('INSERT INTO icons (id, image) VALUES (?, ?)');
             $newer_stmt->bind_param("ib", $id, $default_pfp);
             $newer_stmt->execute();

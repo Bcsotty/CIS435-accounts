@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS icons (
-    id int(11),
-    image blob not null,
+    id int(11) not null ,
+    image longblob not null,
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES accounts (id) ON DELETE CASCADE ON UPDATE CASCADE
 );

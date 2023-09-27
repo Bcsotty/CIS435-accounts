@@ -48,7 +48,7 @@ $stmt->close();
 			<h2>Profile Page</h2>
 			<div>
 				<p>Your account details are below:</p>
-                <img src="get_icon.php" alt="pfp">
+                <img src="get_icon.php?id=<?=$_SESSION['id']?>" alt="pfp">
 				<form action="update.php" method="post" enctype="multipart/form-data">
                     <label for="username">Username:</label>
                     <input type="text" value="<?=$_SESSION['name']?>" name="username" id="username" required minlength="1">
