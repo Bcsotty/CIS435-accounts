@@ -52,7 +52,7 @@ if ($stmt = $con->prepare('SELECT id FROM accounts WHERE username = ?')) {
             $stmt->close();
 
             // Insert default pfp
-            $default_pfp = file_get_contents("default.png");
+            $default_pfp = base64_encode(file_get_contents("default.png"));
 
             if (strlen($default_pfp) === 0) {
                 die("Couldn't read default image :((((");

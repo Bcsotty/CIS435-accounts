@@ -51,10 +51,10 @@ $stmt->close();
                 <img src="get_icon.php?id=<?=$_SESSION['id']?>" alt="pfp">
 				<form action="update.php" method="post" enctype="multipart/form-data">
                     <label for="username">Username:</label>
-                    <input type="text" value="<?=$_SESSION['name']?>" name="username" id="username" minlength="1">
+                    <input type="text" value="<?=$_SESSION['name']?>" name="username" id="username" minlength="1" required>
                     <br>
                     <label for="password">Password:</label>
-                    <input type="password" value="<?=$password?>" name="password" id="password" minlength="1">
+                    <input type="password" value="<?=$password?>" name="password" id="password" minlength="1" required>
                     <br>
                     <label for="email">Email:</label>
                     <input type="email" value="<?=$email?>" name="email" id="email" readonly>

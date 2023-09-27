@@ -21,4 +21,4 @@ if (strlen($icon) === 0) {
 }
 
 header("Content-type: image/png");
-echo $icon;
+echo base64_decode($icon);

@@ -29,12 +29,14 @@ $prep->execute();
 $prep->close();
 
 // Update icon if sent
-if (isset($_POST['img'])) {
-    $image = $_POST['img'];
+if (isset($_FILES['img'])) {
+    $path = $_FILES['img']['tmp_name'];
+    $image = base64_encode(file_get_contents($path));
+
     $prep2 = $con->prepare("update phplogin.icons
 set image=?
 where id=?;");
-    $prep2->bind_param("ib", $_SESSION['id'], $image);
+    $prep2->bind_param("is", $_SESSION['id'], $image);
     $prep2->execute();
 }
 
