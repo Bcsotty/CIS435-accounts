@@ -45,8 +45,9 @@ if ($stmt = $con->prepare('SELECT id FROM accounts WHERE username = ?')) {
             session_regenerate_id();
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $username;
-            $stmt->bind_result($id);
             $stmt->execute();
+            $stmt->bind_result($id);
+            $stmt->fetch();
             $_SESSION['id'] = $id;
             $stmt->close();
 

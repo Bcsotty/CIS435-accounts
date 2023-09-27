@@ -18,8 +18,8 @@ if (mysqli_connect_errno()) {
 // Fetch users icon
 $stmt2 = $con->prepare('SELECT image FROM icons WHERE id = ?');
 $stmt2->bind_param('i', $_SESSION['id']);
-$stmt2->bind_result($icon);
 $stmt2->execute();
+$stmt2->bind_result($icon);
 $stmt2->fetch();
 $stmt2->close();
 
