@@ -48,20 +48,18 @@ $stmt->close();
 			<h2>Profile Page</h2>
 			<div>
 				<p>Your account details are below:</p>
-				<table>
-					<tr>
-						<td>Username:</td>
-						<td><?=$_SESSION['name']?></td>
-					</tr>
-					<tr>
-						<td>Password:</td>
-						<td><?=$password?></td>
-					</tr>
-					<tr>
-						<td>Email:</td>
-						<td><?=$email?></td>
-					</tr>
-				</table>
+				<form action="update.php" method="post" enctype="multipart/form-data">
+                    <label for="username">Username:</label>
+                    <input type="text" value="<?=$_SESSION['name']?>" name="username" id="username" required minlength="1">
+                    <br>
+                    <label for="password">Password:</label>
+                    <input type="password" value="<?=$password?>" name="password" id="password" required minlength="1">
+                    <br>
+                    <label for="email">Email:</label>
+                    <input type="email" value="<?=$email?>" name="email" id="email" readonly>
+                    <br>
+                    <input type="submit" value="submit new info" name="btn">
+				</form>
 			</div>
 		</div>
 	</body>
