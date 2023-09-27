@@ -45,9 +45,17 @@ if ($stmt = $con->prepare('SELECT id FROM accounts WHERE username = ?')) {
             session_regenerate_id();
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $username;
-            $stmt->execute();
             $stmt->bind_result($id);
+            $stmt->execute();
             $_SESSION['id'] = $id;
+            $stmt->close();
+
+            // Insert default pfp
+            $default_pfp = file_get_contents("default.png");
+            $newer_stmt = $con->prepare('INSERT INTO icons (id, image) VALUES (?, ?)');
+            $newer_stmt->bind_param("ib", $id, $default_pfp);
+            $newer_stmt->execute();
+
             header('Location: home.php');
             exit();
         }

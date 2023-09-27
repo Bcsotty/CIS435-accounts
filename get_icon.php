@@ -15,19 +15,13 @@ if (mysqli_connect_errno()) {
     exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
-// Parse form data
-$new_usr = $_POST['username'];
-$new_pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+// Fetch users icon
+$stmt2 = $con->prepare('SELECT image FROM icons WHERE id = ?');
+$stmt2->bind_param('i', $_SESSION['id']);
+$stmt2->bind_result($icon);
+$stmt2->execute();
+$stmt2->fetch();
+$stmt2->close();
 
-// Prep update query
-$prep = $con->prepare("update phplogin.accounts
-set accounts.username=?,
-    accounts.password=?
-where accounts.id=?;");
- // TODO handle images
-$prep->bind_param('ssi', $new_usr, $new_pass, $_SESSION['id']);
-$prep->execute();
-
-// Force user to log back in
-session_destroy();
-header("location: home.php");
+header("Content-type: image/png");
+echo $icon;

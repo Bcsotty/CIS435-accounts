@@ -6,7 +6,7 @@ if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
-$DATABASE_HOST = 'localhost';
+$DATABASE_HOST = '127.0.0.1';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
 $DATABASE_NAME = 'phplogin';
@@ -48,6 +48,7 @@ $stmt->close();
 			<h2>Profile Page</h2>
 			<div>
 				<p>Your account details are below:</p>
+                <img src="get_icon.php" alt="pfp">
 				<form action="update.php" method="post" enctype="multipart/form-data">
                     <label for="username">Username:</label>
                     <input type="text" value="<?=$_SESSION['name']?>" name="username" id="username" required minlength="1">
