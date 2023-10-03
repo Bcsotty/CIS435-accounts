@@ -17,14 +17,14 @@ if (empty($data)) {
 	exit('Please fill the username, password, and email fields!');
 }
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT id FROM accounts WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT id FROM accounts WHERE username = ? or email = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
-	$stmt->bind_param('s', $data['username']);
+	$stmt->bind_param('ss', $data['username'], $data['email']);
 	$stmt->execute();
 	// Store the result so we can check if the account exists in the database.
 	$stmt->store_result();
     if ($stmt->num_rows > 0) {
-        $errors = array("errors" => "Username taken!");
+        $errors = array("errors" => "Username/Email taken!");
         header("Content-Type: application/json");
         echo json_encode($errors);
         exit();
