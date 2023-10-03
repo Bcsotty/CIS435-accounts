@@ -20,5 +20,5 @@ if (strlen($icon) === 0) {
     die("No icon :((((");
 }
 
-header("Content-type: image/png");
+header("Content-type: image/*");
 echo base64_decode($icon);

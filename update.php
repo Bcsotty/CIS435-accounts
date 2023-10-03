@@ -31,12 +31,18 @@ $prep->close();
 // Update icon if sent
 if (isset($_FILES['img'])) {
     $path = $_FILES['img']['tmp_name'];
-    $image = base64_encode(file_get_contents($path));
+    $contents = file_get_contents($path) or die("Cannot read uploaded image!");
+
+    if (strlen($contents) === 0) {
+        die("Cannot read uploaded image!");
+    }
+
+    $image = base64_encode($contents);
 
     $prep2 = $con->prepare("update phplogin.icons
 set image=?
 where id=?;");
-    $prep2->bind_param("is", $_SESSION['id'], $image);
+    $prep2->bind_param("si", $image, $_SESSION['id']);
     $prep2->execute();
 }
 

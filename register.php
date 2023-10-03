@@ -59,7 +59,7 @@ if ($stmt = $con->prepare('SELECT id FROM accounts WHERE username = ? or email =
             }
 
             $newer_stmt = $con->prepare('INSERT INTO icons (id, image) VALUES (?, ?)') or die("Failed to prep!");
-            $newer_stmt->bind_param("ib", $id, $default_pfp) or die("Failed to bind!");
+            $newer_stmt->bind_param("is", $id, $default_pfp) or die("Failed to bind!");
             $newer_stmt->execute() or die("Failed to exec!");
 
             header('Location: home.php');

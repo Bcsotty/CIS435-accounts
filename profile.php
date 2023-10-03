@@ -35,7 +35,7 @@ $stmt->close();
 		<nav class="navtop">
 			<div>
 				<h1>Website Title</h1>
-				<?php 
+				<?php
 					if ($admin == 1) {
 						echo '<a href="admin.php"><i class="fas fa-eye"></i>Admin Panel</a>';
 					}
@@ -48,7 +48,8 @@ $stmt->close();
 			<h2>Profile Page</h2>
 			<div>
 				<p>Your account details are below:</p>
-                <img src="get_icon.php?id=<?=$_SESSION['id']?>" alt="pfp">
+                <p>Profile Picture:</p>
+                <img src="get_icon.php?id=<?=$_SESSION['id']?>" alt="pfp" style="object-fit: cover; border-radius: 50%; height: 100px; width: 100px;">
 				<form action="update.php" method="post" enctype="multipart/form-data">
                     <label for="username">Username:</label>
                     <input type="text" value="<?=$_SESSION['name']?>" name="username" id="username" minlength="1" required>
