@@ -6,6 +6,26 @@ if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
+
+// Need to verify user is an admin to prevent manually accessing page.
+$DATABASE_HOST = '127.0.0.1';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'phplogin';
+$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+if (mysqli_connect_errno()) {
+	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+}
+$stmt = $con->prepare('SELECT admin FROM accounts WHERE id = ?');
+$stmt->bind_param('i', $_SESSION['id']);
+$stmt->execute();
+$stmt->bind_result($admin);
+$stmt->fetch();
+$stmt->close();
+if ($admin != 1) {
+    header('Location: home.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
